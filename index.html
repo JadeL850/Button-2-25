@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 INPUT 1 OUTPUT TEMPLATE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+   
+
+    <style>
+
+        /* STYLE FOR THE INPUT FIELD */
+        #charInput {
+            width: 20%;
+            height: 5rem;
+            font-size: medium;
+            margin: auto 10px;
+            margin-top: 10%;
+            margin-left: 30%;
+        }
+
+        /* STYLE FOR THE SUBMIT BUTTON */
+        #submitButton {
+            width: 18vw;
+            height: 8rem;
+            border-radius: 30px;
+            border-width: 6px;
+            background-color: lightblue;
+            font-size: 25px;
+            color:black;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        .submitButton span{
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .submitButton:active {
+            background-color:lightblue;
+            box-shadow:0 40px #666;
+            transform: translateY(4px);
+            }
+        
+        /* STYLE FOR THE IMAGE */
+        #displayedImage {
+            display: none; /* This line is mandatory */
+            width: 30%;
+            margin-left: 31%;
+            margin-top: 5%;
+        }
+
+    </style>
+</head>
+<body>
+    
+    
+    <!-- INPUT FIELD FOR 1 CHARACTER -->
+    <input type="text" id="charInput" maxlength="1">
+
+    <!-- BUTTON TO DISPLAY IMAGE -->
+    <button onclick="displayImage()" id="submitButton">Show Image</button>
+
+    <!-- IMAGE TO DISPLAY -->
+    <img id="displayedImage" src="" alt="Displayed Image">
+
+
+    <!-- Image Display Script Below -->
+    <script>
+        // Array of images
+        // DIRECTIONS: UPDATE THE URLS WITH THE RELATIVE LINKS OF YOUR IMAGES
+        const images = [
+            "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWkwdmg0emdjandmOHdydTRlYXh5Mm0wZ3NodG5pOHdlemYyMWRjcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/84rG9j2H62hwc/giphy.gif", //A
+            "https://media.tenor.com/BizS5xQKfbcAAAAi/banana-cat-banana-cat-running.gif", //B
+            "https://media1.tenor.com/m/7t63GFnoIPUAAAAd/huh-cat-huh-m4rtin.gif", //C
+            "https://media1.tenor.com/m/b6ymPWEJEAIAAAAd/cat-dance.gif", //D
+            "https://media1.tenor.com/m/mhSnyXJIXwgAAAAC/elephant-big.gif", //E
+            "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZidDZqcWlobDB1MGVucGptaDA0N3BoMjl4Y2oxY3Bpc2hrMmpqZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lK1qaDdAjiqIVi/giphy.gif", //F
+            "https://i.pinimg.com/736x/aa/3e/36/aa3e366e771dd382d4f2cae4a5683e77.jpg", //G
+            "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXlzdHRhcmMzYTBtdzY3d2w2OW1xM3M5ODZyc2loYTB1cjlmbmQ4OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7WTHb2WjEXbsmWDS/giphy.gif", //H
+            "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmRsYXk0a3Z2OGQ0MTg0bnR1N2g2djE2ZHN4b2NicnJpejMwYzJzMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7WTQqsDe6gyLv0hG/giphy.gif", //I
+            "https://i.pinimg.com/originals/82/17/d4/8217d41e709fe811fd57d55120fee6f6.gif", //J
+            "https://media1.tenor.com/m/NmHqIQB3rsQAAAAC/kim.gif", //K
+            "https://media1.tenor.com/m/b89Uz-3in6UAAAAd/l-train-train.gif", //L
+            "https://media1.tenor.com/m/9b7oIpLH8JYAAAAd/m%26m-yellow-m%26m.gif", //M
+            "https://media1.tenor.com/m/vLK4Mq3jiKIAAAAd/cat-no.gif", //N
+            "https://media1.tenor.com/m/Lp8LMe8ng80AAAAd/cat-meme-cat-meme-face.gif", //O
+            "https://media1.tenor.com/m/p194CeXE0mIAAAAd/bought-property.gif", //P
+            "https://media1.tenor.com/m/6KmYotRTs50AAAAC/roodmuch-thinking.gif", //Q
+            "https://media1.tenor.com/m/etPPc-Xl9AAAAAAC/reply-reply-me.gif", //R
+            "https://media1.tenor.com/m/ar5drFMdksEAAAAC/thats-pretty-standard-standard.gif", //S
+            "https://media1.tenor.com/m/cHlNeTD7XlgAAAAC/gravewalker-task.gif", //T
+            "https://media1.tenor.com/m/troWhJKIjZsAAAAC/hey-cat.gif", //U
+            "https://media1.tenor.com/m/liODioOObYEAAAAC/value-devovalue.gif", //V
+            "https://media1.tenor.com/m/_B21t-bYWeQAAAAC/morning-greetings.gif", //W
+            "https://media1.tenor.com/m/ULkrp3kjur8AAAAC/x-x-bfb.gif", //X
+            "https://media1.tenor.com/m/9D9qDCsgeEQAAAAd/cat-yogurt.gif", //Y
+            "https://media1.tenor.com/m/NUDnN3Uj20QAAAAC/zebra-zebras.gif"  //Z
+        ];
+
+        function displayImage() {
+            const input = document.getElementById("charInput").value.toUpperCase();
+            const imgElement = document.getElementById("displayedImage");
+            
+            // Assign an image based on character (A-Z)
+            const index = input.charCodeAt(0) - 65; // 'A' is 65 in ASCII
+            if (index >= 0 && index < images.length) {
+                imgElement.src = images[index];
+                imgElement.style.display = "block";
+            } else {
+                /* 
+                alert("Please enter a letter between A and Z.");
+                imgElement.style.display = "none";
+                */
+
+                // IF INVALID INPUT IS ENTERED, DISPLAY ALTERNATE IMAGE
+                imgElement.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmtkdnJhMXY4Njd1cXR3MTM3MW1nMzZ1NXNhNHlhOHA0MWF2dDUzdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13dRJkj5wgKq9q/giphy.gif"
+                imgElement.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
